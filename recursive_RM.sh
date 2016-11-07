@@ -9,13 +9,14 @@
 #                both matching files.
 
 # --------------------- begin script ------------------------------------------------------
-#change from spaces to ;
+
+#change IFS from spaces to ; This allows spaces in the file names	
 old_IFS=$IFS
 IFS=$';'
 
 #puts the time in the logs
-echo `date` >> ian_log.txt
-echo `date` >> ian_delete.txt
+echo `date` >> log.ian
+echo `date` >> deleted.ian
 
 recursive_check ()
 {
@@ -27,13 +28,13 @@ recursive_check ()
 			then
 				if [ "${item1##*/}" = "${item2##*/}" ]
 			then
-					echo "		Calling resursive with ${item1##*/} ${item2##*/}" >> ian_log.txt
+					echo "		Calling resursive with ${item1##*/} ${item2##*/}" >> log.tx
 					recursive_check "$item1" "$item2"
 				fi
 			else
 				if [ "${item1##*/}" = "${item2##*/}" ]
 				then			
-					echo "		match for ${item1##*/} in $item1" >> ian_delete.txt
+					echo "		match for ${item1##*/} in $item1" >> deleted.ian
 					rm $item1
 				fi
 			fi
@@ -41,6 +42,7 @@ recursive_check ()
 	done
 }
 
+# replace .public and .hidden with the absolute paths to the two different directories
 recursive_check ./public ./hidden
 
 
