@@ -1,8 +1,14 @@
 #!/bin/bash
 
-#created by Ian Granger
-#a Recursive script, to check the contense of a directory, find matches in another directory, and check any nested directories.
+# Created by: Ian Granger
+# github repo: https://github.com/icgranger9/recursive_RM
 
+# Purpose: this script is meant to deal with duplicate files, when using ____ and ____.
+# Functionality: It compares two directories, and recursively checks for matching files, 
+#                where the files in d1 have _HIDDEN~ appended to the name. It then deletes 
+#                both matching files.
+
+# --------------------- begin script ------------------------------------------------------
 #change from spaces to ;
 old_IFS=$IFS
 IFS=$';'
